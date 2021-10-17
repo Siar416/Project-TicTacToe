@@ -1,0 +1,23 @@
+.heading {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    justify-content: center;
+    text-align: center;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 80px;
+
+}
+
+.gridArea {
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 35px;
+}
