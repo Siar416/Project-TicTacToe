@@ -2,6 +2,11 @@ const GAMEBOARD = document.getElementById('gameBoard');
 const GRIDAREA = document.querySelectorAll('.gridArea');
 
 
+const Player = (name, selection) => {
+    return { name, selection}
+}
+
+const player1 = Player('Siar', 'X');
 
 
 const GameBoardObj = {
@@ -15,11 +20,11 @@ const GameBoardObj = {
 };
 
 
-
+/*
 for (let i = 0; i < GRIDAREA.length; i++) {
     GRIDAREA[i].addEventListener('click', () => {
         if(GRIDAREA[i].textContent === 'X') {
-            console.log('Spot Taken');
+            alert('Oops! Sorry, spot taken');
         } else {
             let playerSelection = document.createElement('p');
             playerSelection.textContent = 'X';
@@ -27,4 +32,20 @@ for (let i = 0; i < GRIDAREA.length; i++) {
         }
     });
 }
+*/
+
+
+for (let i = 0; i < GRIDAREA.length; i++) {
+    GRIDAREA[i].addEventListener('click', () => {
+        if(GRIDAREA[i].textContent === 'X') {
+            alert('Oops! Sorry, spot taken');
+        } else {
+            let selected = document.createElement('p');
+            selected.textContent = 'X';
+            GRIDAREA[i].appendChild(selected);
+
+        }
+    });
+}
+
 
