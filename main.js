@@ -2,15 +2,16 @@ const GAMEBOARD = document.getElementById('gameBoard');
 const GRIDAREA = document.querySelectorAll('.gridArea');
 
 
-const Player = (name, selection) => {
-    return { name, selection}
+const Player = (name, selection, moves) => {
+    return { name, selection, moves}
 }
 
-const player1 = Player('Siar', 'X');
+const player1 = Player('Siar', 'X', 0);
+const player2 = Player('Zinny', 'O', 0)
 
 
 const GameBoardObj = {
-    gamebord: ['X', 'O'],
+    gameboard: ['X', 'O'],
     player: function(name) {
         const getName = () => name;
 
@@ -19,33 +20,42 @@ const GameBoardObj = {
 
 };
 
-
 /*
 for (let i = 0; i < GRIDAREA.length; i++) {
-    GRIDAREA[i].addEventListener('click', () => {
-        if(GRIDAREA[i].textContent === 'X') {
-            alert('Oops! Sorry, spot taken');
-        } else {
-            let playerSelection = document.createElement('p');
-            playerSelection.textContent = 'X';
-            GRIDAREA[i].appendChild(playerSelection);
+    GRIDAREA[i].addEventListener('click', () =>{
+        if(GRIDAREA[i].textContent === player1.selection || GRIDAREA[i].textContent === player2.selection) {
+            alert('Oops! That spot is taken');
+        } else if(GRIDAREA[i].textContent === '') {
+            let selected = document.createElement('p');
+            selected.textContent = player1.selection;
+            player1.moves++;
+            GRIDAREA[i].appendChild(selected);
         }
     });
 }
 */
 
+let xCounter = 0;
+let oCounter = 0;
 
-for (let i = 0; i < GRIDAREA.length; i++) {
-    GRIDAREA[i].addEventListener('click', () => {
-        if(GRIDAREA[i].textContent === 'X') {
-            alert('Oops! Sorry, spot taken');
-        } else {
-            let selected = document.createElement('p');
-            selected.textContent = 'X';
-            GRIDAREA[i].appendChild(selected);
-
-        }
-    });
+const game = function() {
+    for(let i = 0; i < GRIDAREA.length; i++) {
+        GRIDAREA[i].addEventListener('click', () =>{
+            if(GRIDAREA[i].textContent === player1.selection || GRIDAREA[i].textContent === player2.selection) {
+                alert('Oops! That spot is taken');
+            } else if(GRIDAREA[i].textContent === '') {
+                let selected = document.createElement('p');
+                selected.textContent = player1.selection;
+                player1.moves++;
+                xCounter++;
+                GRIDAREA[i].appendChild(selected);
+            }
+        });
+    }
 }
+
+const playerMoves = (function() {
+    
+})();
 
 
