@@ -11,51 +11,26 @@ const player2 = Player('Zinny', 'O', 0)
 
 
 const GameBoardObj = {
-    gameboard: ['X', 'O'],
-    player: function(name) {
-        const getName = () => name;
-
-        return { getName }
-    },
-
+    gameboard: ['X', 'O']
 };
 
-/*
-for (let i = 0; i < GRIDAREA.length; i++) {
-    GRIDAREA[i].addEventListener('click', () =>{
-        if(GRIDAREA[i].textContent === player1.selection || GRIDAREA[i].textContent === player2.selection) {
-            alert('Oops! That spot is taken');
-        } else if(GRIDAREA[i].textContent === '') {
-            let selected = document.createElement('p');
-            selected.textContent = player1.selection;
-            player1.moves++;
-            GRIDAREA[i].appendChild(selected);
-        }
-    });
-}
-*/
 
-let xCounter = 0;
-let oCounter = 0;
-
-const game = function() {
+function game() {
     for(let i = 0; i < GRIDAREA.length; i++) {
-        GRIDAREA[i].addEventListener('click', () =>{
-            if(GRIDAREA[i].textContent === player1.selection || GRIDAREA[i].textContent === player2.selection) {
-                alert('Oops! That spot is taken');
+        GRIDAREA[i].addEventListener('click', () => {
+           if(GRIDAREA[i].textContent === player1.selection || GRIDAREA[i].textContent === player2.selection) {
+                alert('Spot taken!');
             } else if(GRIDAREA[i].textContent === '') {
-                let selected = document.createElement('p');
-                selected.textContent = player1.selection;
-                player1.moves++;
-                xCounter++;
-                GRIDAREA[i].appendChild(selected);
+                //let selected = document.createElement('p');
+                //selected.textContent = player1.selection;
+                //player1.moves++;
+                //GRIDAREA[i].appendChild(selected);
+                GRIDAREA[i].textContent = player1.selection;
             }
         });
     }
 }
+game();
 
-const playerMoves = (function() {
-    
-})();
 
 
