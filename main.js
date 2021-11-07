@@ -1,9 +1,9 @@
 const GAMEBOARD = document.getElementById('gameBoard');
 const GRIDAREA = document.querySelectorAll('.gridArea');
-
+const CELL = document.querySelectorAll('[data-index]');
 
 const Player = (name, selection, moves) => {
-    return { name, selection, moves}
+    return { name, selection, moves }
 }
 
 const player1 = Player('Siar', 'X', 0);
@@ -11,11 +11,11 @@ const player2 = Player('Zinny', 'O', 0)
 
 
 const GameBoardObj = {
-    gameboard: []
+    gameboard: ['', '', '', '', '', '', '', '', '']
 };
 
 
-
+let currentPlayer = player1;
 function turns() {
     if(currentPlayer === player1) {
         currentPlayer = player2;
@@ -24,7 +24,6 @@ function turns() {
     }
 }
 
-let currentPlayer = player1;
 
 const winningCombos = [
         [0, 1, 2],
@@ -37,7 +36,7 @@ const winningCombos = [
         [2, 4, 6],
 ];
 
-
+/*
 function game() {
     for (let i = 0; i < GRIDAREA.length; i++) {
         GRIDAREA[i].addEventListener('click', () => {
@@ -59,14 +58,28 @@ function game() {
     }
 }
 game();
+*/
 
-function winCombo() {
-    for(let i = 0; i < winningCombos.length; i++) {
-       if(winningCombos[i] === GameBoardObj.gameboard) {
-           console.log('winner');
-       }
+function game() {
+    for(let i = 0; i < CELL.length; i++) {
+        CELL[i].addEventListener('click', () => {
+            if(CELL[i].textContent === player1.selection || CELL[i].textContent === player2.selection) {
+                alert('Sorry, spot taken');
+            } else if(CELL[i].textContent === '') {
+                CELL[i].textContent = currentPlayer.selection;
+                GameBoardObj.gameboard[i] = CELL[i].innerHTML;
+                currentPlayer.moves++;
+                turns();
+            } else {
+                CELL[i].extContent = player2.selection;
+                GameBoardObj.gameboard[i] = CELL[i].innerHTML;
+                currentPlayer.moves++;
+            }
+        });
     }
 }
+game();
+
 
 
 
