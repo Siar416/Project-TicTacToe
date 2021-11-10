@@ -1,23 +1,51 @@
+:root {
+    --purple: rgb(149, 53, 83)
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--purple);
+}
+
+.restartBTN {
+    width: 100px;
+    height: 30px;
+}
+
+.restartBTN:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+
 .heading {
     text-align: center;
     margin-top: 100px;
 }
 
 #gameBoard {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    justify-content: center;
-    text-align: center;
-    grid-auto-rows: minmax(100px, auto);
-    margin-top: 80px;
-
+    width: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 100px;
 }
 
 .gridArea {
-    border: 1px solid black;
-    box-sizing: border-box;
+    height: 150px;
+    width: 150px;
     display: flex;
     justify-content: center;
-    text-align: center;
-    padding: 35px;
+    align-items: center;
+    font-size: 50px;
+    color: var(--purple);
 }

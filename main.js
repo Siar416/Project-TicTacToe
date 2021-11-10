@@ -1,5 +1,7 @@
 const GAMEBOARD = document.getElementById('gameBoard');
 const CELL = document.querySelectorAll('[data-index]');
+const boxes = Array.from(document.getElementsByClassName('gridArea'));
+const restartBTN = document.getElementById('restartBTN');
 
 const Player = (name, selection, moves) => {
     return { name, selection, moves }
@@ -45,14 +47,16 @@ function game() {
                 CELL[i].textContent = currentPlayer.selection;
                 GameBoardObj.gameboard[i] = CELL[i].textContent;
                 currentPlayer.moves++;
+                winCheck();
+                drawCheck();
                 turns();
             } else {
                 CELL[i].textContent = currentPlayer.selection;
                 GameBoardObj.gameboard[i] = CELL[i].textContent;
                 currentPlayer.moves++;
+                winCheck();
                 turns();
             }
-            winCheck();
         });
     }
 }
@@ -61,74 +65,81 @@ game();
 
 
 function winCheck() {
-    if(CELL[0].textContent === player1.selection) {
-        if(CELL[1].textContent === player1.selection && CELL[2].textContent === player1.selection) {
-            console.log('Player 1 wins top');
+    if(CELL[0].textContent === currentPlayer.selection) {
+        if(CELL[1].textContent === currentPlayer.selection && CELL[2].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
-        if(CELL[3].textContent === player1.selection && CELL[6].textContent === player1.selection) {
-            console.log('Player 1 wins on left');
+        if(CELL[3].textContent === currentPlayer.selection && CELL[6].textContent === currentPlayer.selection) {
+        console.log(`${currentPlayer.selection} wins`);
             return true;
         }
-        if(CELL[4].textContent === player1.selection && CELL[8].textContent === player1.selection) {
-            console.log('Player 1 wins diagonally');
-            return true;
-        }
-    }
-    if(CELL[8].textContent === player1.selection) {
-        if(CELL[2].textContent === player1.selection && CELL[5].textContent === player1.selection) {
-            console.log('Player 1 wins on right');
-            return true;
-        }
-        if(CELL[6].textContent === player1.selection && CELL[7].textContent === player1.selection) {
-            console.log('Player 1 wins on bottom');
+        if(CELL[4].textContent === currentPlayer.selection && CELL[8].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
     }
-    if(CELL[4].textContent === player1.selection) {
-        if(CELL[1].textContent === player1.selection && CELL[7].textContent === player1.selection) {
-            console.log('Player 1 win vertically in the middle');
+    if(CELL[8].textContent === currentPlayer.selection) {
+        if(CELL[2].textContent === currentPlayer.selection && CELL[5].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
-        if(CELL[3].textContent === player1.selection && CELL[5].textContent === player1.selection) {
-            console.log('Player 1 win horizontally in the middle');
-            return true;
-        }
-    }
-    if(CELL[0].textContent === player2.selection) {
-        if(CELL[1].textContent === player2.selection && CELL[2].textContent === player2.selection) {
-            console.log('Player 2 wins top');
-            return true;
-        }
-        if(CELL[3].textContent === player2.selection && CELL[6].textContent === player2.selection) {
-            console.log('Player 2 wins on left');
-            return true;
-        }
-        if(CELL[4].textContent === player2.selection && CELL[8].textContent === player2.selection) {
-            console.log('Player 2 wins diagonally');
+        if(CELL[6].textContent === currentPlayer.selection && CELL[7].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
     }
-    if(CELL[8].textContent === player2.selection) {
-        if(CELL[2].textContent === player2.selection && CELL[5].textContent === player2.selection) {
-            console.log('Player 2 wins on right');
+    if(CELL[4].textContent === currentPlayer.selection) {
+        if(CELL[1].textContent === currentPlayer.selection && CELL[7].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
-        if(CELL[6].textContent === player2.selection && CELL[7].textContent === player2.selection) {
-            console.log('Player 2 wins on bottom');
+        if(CELL[3].textContent === currentPlayer.selection && CELL[5].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
             return true;
         }
-    }
-    if(CELL[4].textContent === player2.selection) {
-        if(CELL[1].textContent === player2.selection && CELL[7].textContent === player2.selection) {
-            console.log('Player 2 win vertically in the middle');
-            return true;
-        }
-        if(CELL[3].textContent === player2.selection && CELL[5].textContent === player2.selection) {
-            console.log('Player 2 win horizontally in the middle');
-            return true;
+        if(CELL[2].textContent === currentPlayer.selection && CELL[6].textContent === currentPlayer.selection) {
+            console.log(`${currentPlayer.selection} wins`);
         }
     }
 }
 
+
+function drawCheck() {
+    if(currentPlayer.moves === 5) {
+        console.log('draw');
+        return;
+    }
+}
+
+
+const drawBoard = () => {
+    boxes.forEach((box, index) => {
+        let styleString = [];
+        if(index < 3) {
+            styleString += `border-bottom: 3px solid var(--purple);`;
+        }
+        if(index % 3 === 0) {
+            styleString += `border-right: 3px solid var(--purple);`;
+        }
+        if(index % 3 === 2) {
+            styleString += `border-left: 3px solid var(--purple);`;
+        }
+        if(index > 5) {
+            styleString += `border-top: 3px solid var(--purple);`;
+        }
+        box.style = styleString;
+    });
+}
+drawBoard();
+
+restartBTN.addEventListener('click', () => {
+    CELL.forEach((cell, index) => {
+        cell[index] = null;
+    })
+    boxes.forEach(box => {
+        box.innerHTML = '';
+        currentPlayer = player1;
+    });
+});
 
